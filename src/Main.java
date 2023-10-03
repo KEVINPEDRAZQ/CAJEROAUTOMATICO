@@ -2,36 +2,39 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        final int saldo_inicial = 5000;
-        int opcion;
-        float ingreso,saldoActual,retiro;
+        int saldo = 100000;
+        int opcion = 0;
+        float dineroingresado, retirodinero;
+        while (opcion != 3) {
+            opcion = Integer.parseInt(JOptionPane.showInputDialog("bienvenido al cajero automatico coco loco\n"
+                    + "1.desea ingrsar dinero a su cuenta\n"
+                    + "2.desea sacar dinero de su cuenta\n"
+                    + "3.salir"));
 
-        opcion = Integer.parseInt(JOptionPane.showInputDialog("Bienvenido a su cajero automatico\n"
-        + "1. ingresar dinero a la cuenta\n"
-        + "2. retirar dinero de la cuenta\n"
-        + "3. salir"));
+            switch (opcion) {
+                case 1:
+                    dineroingresado = Float.parseFloat(JOptionPane.showInputDialog("dijite la cantidad de dinero que va a ingresar a su cuenta"));
+                    saldo = (int) (saldo + dineroingresado);
+                    JOptionPane.showMessageDialog(null, "el dinero que tienes en tu cuenta es de" + saldo);
+                    break;
+                case 2:
+                    retirodinero = Float.parseFloat(JOptionPane.showInputDialog("dijite la cantidad de dinero que desea retirar de la cuenta"));
+                    if (retirodinero > saldo) {
+                        JOptionPane.showMessageDialog(null, "el dinero que desea ingresar no esta disponible trabaje mas");
+                    } else {
+                        saldo = (int) (saldo - retirodinero);
+                        JOptionPane.showMessageDialog(null, "el saldo de la cuenta esta en" + saldo);
 
-        switch(opcion) {
-            case 1:
-                ingreso = Float.parseFloat(JOptionPane.showInputDialog("Digite la cantidad que desea ingresar en la cuenta: "));
-                saldoActual = saldo_inicial + ingreso;
-                JOptionPane.showMessageDialog(null, "Dinero en cuenta: " + saldoActual);
-                break;
-            case 2:
-                retiro = Float.parseFloat(JOptionPane.showInputDialog(("Digite la cantidad que desean retirar")));
+                    }
+                    break;
+                case 3:
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "la opcion que ingreso no exite por favor revise su vista");
+                    break;
 
-                if (retiro > saldo_inicial) {
-                    JOptionPane.showMessageDialog(null, "nocuenta con el saldo suficiente para este retiro");
-                } else {
-                    saldoActual = saldo_inicial - retiro;
-                    JOptionPane.showMessageDialog(null, "Dinero en cuenta: " + saldoActual);
-                }
-                break;
-            case 3:
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "se equivoco de opcion de menu");
-                break;
+
+            }
         }
     }
 }
